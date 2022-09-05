@@ -5,6 +5,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="styles.css" />
+        <script src="script.js" defer></script>
     </head>
     <body>
         <header>
@@ -13,14 +14,14 @@
             </div>
             <nav>
                 <ul>
-                    <li>GitHub Repository</li>
-                    <li>Other Projects</li>
+                    <li><a href="https://github.com/dimmerz92/calculator" target="_blank">GitHub Repository</a></li>
+                    <li><a href="https://github.com/dimmerz92/" target="_blank">Projects</a></li>
                 </ul>
             </nav>
         </header>
         <main>
             <div class="calculator">
-                <div class="screen">123456789</div>
+                <div id="screen"></div>
                 <div class="buttons">
                     <div class="col1">
                         <button id="clear" class="button function">clear</button>
