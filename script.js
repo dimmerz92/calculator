@@ -20,38 +20,43 @@ buttons.forEach(button => {
 //displays numbers on screen
 const screen = document.getElementById("screen");
 function numbers(e) {
-    let screenLength = screen.textContent.replace(".","").length;
-    let noSymbols = /[.-]/g.test(screen.textContent);
-    if (operatorPressed && !curr) {
+    let screenLength = screen.textContent.replace(/[.-]/g,"").length;
+    let decimal = screen.textContent.includes(".");
+    if (operatorPressed && curr == null) {
         screen.textContent = e;
         curr = Number(screen.textContent);
         return;
     }
-    if (screenLength < 9 && !noSymbols && curr == 0) {
+    if (screenLength < 9 && curr == 0) {
         screen.textContent += e;
         curr = Number(screen.textContent)
-    } else if (screenLength < 9 && !noSymbols) {
+    } else if (screenLength < 9 && !decimal) {
+        screen.textContent += e;
+        curr = Number(screen.textContent)
+    } else if (screenLength < 9 && e != ".") {
         screen.textContent += e;
         curr = Number(screen.textContent)
     }
 }
 
 //handles operation keys
+let myLong = 0;
 function operators(e) {
     if (e != "equals" && !operatorPressed) {
         operatorPressed = true;
         prev = curr;
-        curr = false;
+        curr = null;
         nextOperation = e;
     } else if (e != "equals" && nextOperation) {
         operatorPressed = true;
         prev = operation(nextOperation, prev, curr);
-        curr = false;
+        curr = null;
         nextOperation = e;
     } else if (e == "equals" && nextOperation) {
         operatorPressed = false;
         curr = operation(nextOperation, prev, curr);
         if (curr.toString().length > 9) {
+            myLong = curr;
             curr = curr.toFixed(8)
         }
         screen.textContent = curr;
